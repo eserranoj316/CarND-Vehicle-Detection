@@ -10,16 +10,16 @@ The goals / steps of this project are the following:
 * Estimate a bounding box for vehicles detected.
 
 [//]: # (Image References)
-[image1]: output_images/car_notcar.png
-[image2]: output_images/hog_extraction.png
-[image3]: output_images/sliding_window.png
-[image4]: output_images/improved_scale.png
-[image5]:  output_images/heatMap.png
-[image6]: output_images/car_boxed.png
+[image1]: ./output_images/car_notcar.png
+[image2]: ./output_images/hog_extraction.png
+[image3]: ./output_images/sliding_window.png
+[image4]: ./output_images/improved_scale.png
+[image5]: ./output_images/heatMap.png
+[image6]: ./output_images/car_boxed.png
 ---
-###Histogram of Oriented Gradients (HOG)
+### Histogram of Oriented Gradients (HOG)
 
-####1. Extracting HOG features from the training images.
+#### 1. Extracting HOG features from the training images.
 
 HOG features are extracted from all the images found in the labeled data set [vehicle](https://s3.amazonaws.com/udacity-sdc/Vehicle_Tracking/vehicles.zip)
 and [non-vehicle](https://s3.amazonaws.com/udacity-sdc/Vehicle_Tracking/non-vehicles.zip).
@@ -42,7 +42,7 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 ![alt text][image2]
 
-####2. HOG parameters selection.
+#### 2. HOG parameters selection.
 
 By trying different variation of hog parametes, I looked for the image representation of features extracted that can give more value in identifying certain class. Before combining Hog, bin spatial, and histogram features, I experimented with Hog parameters independenlty and found the following parameters to be good in detecting object edges/line orientation (CarND_VehicleDetection.py -> line 87):  
 ```
@@ -54,7 +54,7 @@ By trying different variation of hog parametes, I looked for the image represent
         spatial_size = (32, 32) # Spatial binning dimensions
   ```
 
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+#### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
 I did the following steps in training the SVM classifier:
 1. read and shuffled all labeled data set (vehicle/non-vehicle).(CarND_VehicleDetection.py -> line 72)
@@ -64,14 +64,14 @@ the images.(CarND_VehicleDetection.py -> line 106, functon_utils.py->extract_fea
 4. Train SVC classifier (CarND_VehicleDetection.py svc.fit(X_train, y_train)
  
  ###Sliding Window Search
-####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+#### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
 I used the Hog  Sub-sampling window search (function_utils.py->find_cars function). The find_cars function accept road image (single or from a video frame) , hog parameters, spatial_size, histogram bin size, svc(classifier) and will do sliding window search. For each window that the code visit it extract the features and run through the svc classifier to predict if the region is car or not. All windows (bounding boxes) that were predicted as cars are returned. These bounding boxes some of which overlaps are eventually will be use to mark a real car(s)  after some thresholding, averaging.  I tried scales [0,5, 0.75,1,1.5,2] but found out that the lower the scale the more the false positive appears in the detection. I end it up using [1,1.5,2].
 
 
 ![alt text][image3]
 
-####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
+#### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
 By combining YCrCb 3-channel HOG features, spatially binned color and histograms of color in the feature vector and experementing with the scale values in relation to sliding/overlap window,  I'm able to minimize the false positive scenario. See example images:
 
@@ -94,6 +94,6 @@ All bounding boxes for positive detections were saved and a corresponding heatma
 
 ---
 
-###Discussion
+### Discussion
 Looking at the annotated video, there are some few false positive detections. Also the bounding boxes sometimes are not fully covering the entire car. Bounding boxes also flickers. I also noticed that false positive sometimes just happen in an area where color has resemblance to a car(s)  that might have been part of the training set.Getting more data set (car and non-car) will probably help a bit in minimizing bad detection. Also experementing with other Classifier other that SVM will probably improve the detection accuracy.   
 
