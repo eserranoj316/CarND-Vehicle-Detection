@@ -11,6 +11,7 @@ The goals / steps of this project are the following:
 
 ---
 [//]: # (Image References)
+
 [image1]: ./output_images/car_notcar.png ""
 [image2]: ./output_images/hog_extraction.png ""
 [image3]: ./output_images/sliding_window.png ""
