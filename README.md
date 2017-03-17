@@ -9,13 +9,14 @@ The goals / steps of this project are the following:
 * Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
 * Estimate a bounding box for vehicles detected.
 
+---
 [//]: # (Image References)
-[image1]: ./output_images/car_notcar.png
-[image2]: ./output_images/hog_extraction.png
-[image3]: ./output_images/sliding_window.png
-[image4]: ./output_images/improved_scale.png
-[image5]: ./output_images/heatMap.png
-[image6]: ./output_images/car_boxed.png
+[image1]: ./output_images/car_notcar.png ""
+[image2]: ./output_images/hog_extraction.png ""
+[image3]: ./output_images/sliding_window.png ""
+[image4]: ./output_images/improved_scale.png ""
+[image5]: ./output_images/heatMap.png ""
+[image6]: ./output_images/car_boxed.png ""
 ---
 ### Histogram of Oriented Gradients (HOG)
 
