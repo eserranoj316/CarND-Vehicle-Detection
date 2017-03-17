@@ -10,12 +10,14 @@ The goals / steps of this project are the following:
 * Estimate a bounding box for vehicles detected.
 
 [//]: # (Image References)
+
 [image1]: output_images/car_notcar.png
 [image2]: output_images/hog_extraction.png
 [image3]: output_images/sliding_window.png
 [image4]: output_images/improved_scale.png
 [image5]:  output_images/heatMap.png
 [image6]: output_images/car_boxed.png
+
 ---
 ###Histogram of Oriented Gradients (HOG)
 
